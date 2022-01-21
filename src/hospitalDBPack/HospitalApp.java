@@ -22,6 +22,7 @@ public class HospitalApp {
 	static FrmPatientsUpdate patUpdateFrame;
 	static PatSearchForm patSearchFrame;
 	static LoginWindow loginFrame;
+	static RegisterAccount registerFrame;
 	
 	
 	public static void main(String[] args) {
@@ -31,6 +32,10 @@ public class HospitalApp {
 					loginFrame = new LoginWindow();
 					loginFrame.setLocationRelativeTo(null);
 					loginFrame.setVisible(true);
+					
+					registerFrame = new RegisterAccount();
+					registerFrame.setLocationRelativeTo(null);
+					registerFrame.setVisible(false);
 					
 					mainFrame = new MainWindow();
 					mainFrame.setLocationRelativeTo(null);

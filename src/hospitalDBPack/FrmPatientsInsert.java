@@ -2,6 +2,7 @@ package hospitalDBPack;
 
 /**
  * Inserts a new entry in the patients table
+ * Patient's ID is generated automatically
  * 
  * @author I.Karadimas
  * @version 0.1
@@ -94,6 +95,7 @@ public class FrmPatientsInsert extends JFrame {
 		contentPane.add(lbl_fname);
 		
 		frm_ID = new JTextField();
+		frm_ID.setEditable(false);
 		frm_ID.setBounds(196, 50, 130, 20);
 		contentPane.add(frm_ID);
 		frm_ID.setColumns(10);
@@ -125,17 +127,15 @@ public class FrmPatientsInsert extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					int id = Integer.parseInt(frm_ID.getText());
 					String sname = frm_sname.getText();
 					String fname = frm_fname.getText();
 					int iddoc = Integer.parseInt(frm_DOC_ID.getText());
 					
-					PreparedStatement p = MainWindow.conn.prepareStatement("INSERT INTO hospital.patients VALUE (?, ?, ?, ?)");
+					PreparedStatement p = MainWindow.conn.prepareStatement("INSERT INTO hospital.patients (PAT_SNAME, PAT_FNAME, DOCTORS_DOC_ID) VALUE (?, ?, ?)");
 					
-					p.setInt(1, id);
-					p.setString(2, sname);
-					p.setString(3, fname);
-					p.setInt(4, iddoc);
+					p.setString(1, sname);
+					p.setString(2, fname);
+					p.setInt(3, iddoc);
 					
 					p.executeUpdate();
 					
