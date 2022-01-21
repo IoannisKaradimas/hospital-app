@@ -29,6 +29,7 @@ public class HospitalApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					loginFrame = new LoginWindow();
 					loginFrame.setLocationRelativeTo(null);
 					loginFrame.setVisible(true);
