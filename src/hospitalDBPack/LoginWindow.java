@@ -106,12 +106,8 @@ public class LoginWindow extends JFrame {
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String url = "jdbc:mysql://localhost:3306/hospital?useSSL=false&serverTimezone=UTC";
-				String username	= "root";
-				String password = "121292joh";
 				
 		        try {
-		        	conn = DriverManager.getConnection(url, username, password);
 		        	String userID = userIDField.getText().trim();
 		        	String passID = userPasswordField.getText().trim();
 		        	Statement stmt = conn.createStatement();

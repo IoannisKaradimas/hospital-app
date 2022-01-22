@@ -12,6 +12,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -91,7 +92,7 @@ public class RegisterAccount extends JFrame {
 		contentPane.add(userIdTextField);
 		userIdTextField.setColumns(10);
 		
-		passwordTextField = new JTextField();
+		passwordTextField = new JPasswordField();
 		passwordTextField.setBounds(137, 129, 155, 20);
 		contentPane.add(passwordTextField);
 		passwordTextField.setColumns(10);
