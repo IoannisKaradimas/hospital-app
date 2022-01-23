@@ -35,7 +35,6 @@ import javax.swing.border.BevelBorder;
 public class FrmDoctorsInsert extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField frm_ID;
 	private JTextField frm_sname;
 	private JTextField frm_fname;
 
@@ -57,7 +56,6 @@ public class FrmDoctorsInsert extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				frm_ID.setText("");
 				frm_sname.setText("");
 				frm_fname.setText("");
 			}
@@ -72,40 +70,6 @@ public class FrmDoctorsInsert extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lbl_ID = new JLabel("ID");
-		lbl_ID.setForeground(new Color(178, 34, 34));
-		lbl_ID.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_ID.setBounds(29, 51, 49, 14);
-		contentPane.add(lbl_ID);
-		
-		JLabel lbl_sname = new JLabel("Surname");
-		lbl_sname.setForeground(new Color(178, 34, 34));
-		lbl_sname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_sname.setBounds(29, 89, 70, 14);
-		contentPane.add(lbl_sname);
-		
-		JLabel lbl_fname = new JLabel("First Name");
-		lbl_fname.setForeground(new Color(178, 34, 34));
-		lbl_fname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_fname.setBounds(29, 129, 80, 14);
-		contentPane.add(lbl_fname);
-		
-		frm_ID = new JTextField();
-		frm_ID.setEditable(false);
-		frm_ID.setBounds(196, 50, 130, 20);
-		contentPane.add(frm_ID);
-		frm_ID.setColumns(10);
-		
-		frm_sname = new JTextField();
-		frm_sname.setBounds(196, 88, 180, 20);
-		contentPane.add(frm_sname);
-		frm_sname.setColumns(10);
-		
-		frm_fname = new JTextField();
-		frm_fname.setBounds(196, 128, 180, 20);
-		contentPane.add(frm_fname);
-		frm_fname.setColumns(10);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.DARK_GRAY);
@@ -159,5 +123,28 @@ public class FrmDoctorsInsert extends JFrame {
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 30, 462, 135);
 		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lbl_sname = new JLabel("Surname");
+		lbl_sname.setBounds(10, 29, 70, 14);
+		panel.add(lbl_sname);
+		lbl_sname.setForeground(new Color(178, 34, 34));
+		lbl_sname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		frm_sname = new JTextField();
+		frm_sname.setBounds(177, 28, 180, 20);
+		panel.add(frm_sname);
+		frm_sname.setColumns(10);
+		
+		JLabel lbl_fname = new JLabel("First Name");
+		lbl_fname.setBounds(10, 91, 80, 14);
+		panel.add(lbl_fname);
+		lbl_fname.setForeground(new Color(178, 34, 34));
+		lbl_fname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		frm_fname = new JTextField();
+		frm_fname.setBounds(177, 90, 180, 20);
+		panel.add(frm_fname);
+		frm_fname.setColumns(10);
 	}
 }

@@ -33,12 +33,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class RegisterAccount extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField userIdTextField;
 	private JTextField passwordTextField;
+	private JPasswordField passConfTextField;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,6 +61,7 @@ public class RegisterAccount extends JFrame {
 			public void windowActivated(WindowEvent e) {
 				userIdTextField.setText("");
 				passwordTextField.setText("");
+				passConfTextField.setText("");
 			}
 		});
 		
@@ -74,26 +77,28 @@ public class RegisterAccount extends JFrame {
 		
 		JLabel lbl_create = new JLabel("Create Account");
 		lbl_create.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lbl_create.setBounds(152, 23, 125, 27);
+		lbl_create.setBounds(180, 23, 125, 27);
 		contentPane.add(lbl_create);
 		
 		JLabel lbl_userId = new JLabel("Username:");
+		lbl_userId.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_userId.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbl_userId.setBounds(42, 76, 71, 14);
+		lbl_userId.setBounds(55, 77, 71, 14);
 		contentPane.add(lbl_userId);
 		
 		JLabel lbl_password = new JLabel("Password:");
+		lbl_password.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_password.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbl_password.setBounds(42, 132, 66, 14);
+		lbl_password.setBounds(55, 112, 71, 14);
 		contentPane.add(lbl_password);
 		
 		userIdTextField = new JTextField();
-		userIdTextField.setBounds(137, 73, 155, 20);
+		userIdTextField.setBounds(152, 75, 180, 20);
 		contentPane.add(userIdTextField);
 		userIdTextField.setColumns(10);
 		
 		passwordTextField = new JPasswordField();
-		passwordTextField.setBounds(137, 129, 155, 20);
+		passwordTextField.setBounds(152, 109, 180, 20);
 		contentPane.add(passwordTextField);
 		passwordTextField.setColumns(10);
 		
@@ -103,19 +108,22 @@ public class RegisterAccount extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					String userId = userIdTextField.getText().trim();
-					String password = passwordTextField.getText().trim();
+			try {
+				String userId = userIdTextField.getText().trim();
+				String password = passwordTextField.getText().trim();
 					
-					//Checks if the username is already in use and returns a message if it is
-					PreparedStatement p = LoginWindow.conn.prepareStatement("select id from userlist where username = ?");
-					p.setString(1, userId);
-					ResultSet rs = p.executeQuery();
+				//Checks if the username is already in use and returns a message if it is
+				PreparedStatement p = LoginWindow.conn.prepareStatement("select id from userlist where username = ?");
+				p.setString(1, userId);
+				ResultSet rs = p.executeQuery();
+				
+				//Confirms Password
+				if (passwordTextField.getText().equals(passConfTextField.getText())) {
 					if (rs.next()) {
 						JOptionPane.showMessageDialog(null, "Username already exists!", "Account Creation", JOptionPane.WARNING_MESSAGE);
 						//Prevents the user from inserting empty fields
 					} else if ((userId.equals("")) || (password.equals(""))) {
-						JOptionPane.showMessageDialog(null, "Username and Password fields cannot be empty!", "Error", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Username and Password fields cannot be empty!", "Registration Failed", JOptionPane.WARNING_MESSAGE);
 						//Inserts a new entry into the DB
 					} else {
 						p = LoginWindow.conn.prepareStatement("INSERT INTO hospital.userlist (username, password) value (?, ?)");
@@ -130,14 +138,18 @@ public class RegisterAccount extends JFrame {
 						HospitalApp.loginFrame.setVisible(true);
 						HospitalApp.registerFrame.setVisible(false);	
 					}
-				} catch (SQLException e1) {
+				} else {
+					JOptionPane.showMessageDialog(null, "Confirmation password does not match!", "Registration Failed", JOptionPane.WARNING_MESSAGE);
+				}
+				
+			} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Something went wrong!", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
 		btnSubmit.setFocusable(false);
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnSubmit.setBounds(173, 180, 89, 23);
+		btnSubmit.setBounds(197, 179, 89, 23);
 		contentPane.add(btnSubmit);
 		
 		JButton btnClose = new JButton("Close");
@@ -152,5 +164,15 @@ public class RegisterAccount extends JFrame {
 		btnClose.setBounds(337, 229, 89, 23);
 		btnClose.setFocusable(false);
 		contentPane.add(btnClose);
+		
+		JLabel lbl_passConfirm = new JLabel("Confirm Password:");
+		lbl_passConfirm.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl_passConfirm.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lbl_passConfirm.setBounds(10, 146, 116, 14);
+		contentPane.add(lbl_passConfirm);
+		
+		passConfTextField = new JPasswordField();
+		passConfTextField.setBounds(152, 143, 180, 20);
+		contentPane.add(passConfTextField);
 	}
 }

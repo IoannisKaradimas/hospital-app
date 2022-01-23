@@ -118,7 +118,7 @@ public class LoginWindow extends JFrame {
 		        		HospitalApp.mainFrame.setVisible(true);
 		        		HospitalApp.loginFrame.setVisible(false);	
 		        	} else {
-						JOptionPane.showMessageDialog(null, "Wrong username or password");
+						JOptionPane.showMessageDialog(null, "Invalid username and/or password");
 						
 						userIDField.setText("");
 						userPasswordField.setText("");

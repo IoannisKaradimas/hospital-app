@@ -1,8 +1,8 @@
 package hospitalDBPack;
 
 /**
- * The user can navigate through the patients
- * database and update or delete any inserts 
+ * The user can navigate through the Patients' database
+ * and update or delete any inserts 
  * 
  * @author I.Karadimas
  * @version 0.1
@@ -77,6 +77,10 @@ public class FrmPatientsUpdate extends JFrame {
 							udfrm_sname.setText(rs.getString("PAT_SNAME"));
 							udfrm_fname.setText(rs.getString("PAT_FNAME"));
 							udfrm_docsid.setText(Integer.toString(rs.getInt("DOCTORS_DOC_ID")));
+						} else {
+							JOptionPane.showMessageDialog(null, "Patient not found!", "Search Result", JOptionPane.PLAIN_MESSAGE);
+							HospitalApp.patSearchFrame.setEnabled(true);
+							HospitalApp.patUpdateFrame.setVisible(false);
 						}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
