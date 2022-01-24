@@ -197,7 +197,9 @@ public class FrmPatientsUpdate extends JFrame {
 						udfrm_sname.setText(rs.getString("PAT_SNAME"));
 						udfrm_fname.setText(rs.getString("PAT_FNAME"));
 						udfrm_docsid.setText(Integer.toString(rs.getInt("DOCTORS_DOC_ID")));
-					} else rs.last();
+					} else {
+						rs.last();
+					}
 					
 				} catch (SQLException e4) {
 					e4.printStackTrace();
@@ -242,8 +244,8 @@ public class FrmPatientsUpdate extends JFrame {
 					dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", JOptionPane.YES_NO_OPTION);
 					
 					if (dialogButton == JOptionPane.YES_OPTION) preparedStmt.execute();
-					else {}
-					
+					HospitalApp.patSearchFrame.setEnabled(true);
+					HospitalApp.patUpdateFrame.setVisible(false);
 					} catch (SQLException e6) {
 						e6.printStackTrace();
 					}
